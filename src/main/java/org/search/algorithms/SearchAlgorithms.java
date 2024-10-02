@@ -1,5 +1,7 @@
 package org.search.algorithms;
 
+import java.util.Arrays;
+
 public class SearchAlgorithms {
     private final int[] array;
     private final int length;
@@ -8,8 +10,12 @@ public class SearchAlgorithms {
         return array;
     }
 
-    public int getFirstValue() {
-        return array[0];
+    public int getMediumValue() {
+        return array[length / 2];
+    }
+
+    public void sort(){
+        Arrays.sort(array);
     }
 
     public SearchAlgorithms(int size) {
@@ -20,12 +26,36 @@ public class SearchAlgorithms {
         length = size;
     }
 
-    public boolean sequentialSearch(int k) {
-        for (int i = 0; i < length; i++)
-        {
-            if (array[i] == k)
-                return true;
+    public int sequentialSearch(int value) {
+        for (int index = 0; index < length; index++) {
+            if (array[index] == value)
+                return index;
         }
-        return false;
+        return -1;
+    }
+
+    public int binarySearch(int value) {
+        int m, left, right;
+        left = 0; right = length - 1;
+        while (left < right) {
+            m = left + (right - left) / 2;
+            if (array[m] < value)
+                left = m;
+            if (array[m] > value)
+                right = m;
+            if (array[m] == value)
+                return m;
+        }
+        return -1;
+    }
+
+    public void print(){
+        for (int i = 0; i < length; i++) {
+            System.out.print(i + " = " + array[i] + "; ");
+            if (i % 10 == 0 && i != 0){
+                System.out.println();
+            }
+        }
+        System.out.println();
     }
 }
