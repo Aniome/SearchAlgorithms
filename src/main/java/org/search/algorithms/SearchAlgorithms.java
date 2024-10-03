@@ -49,6 +49,27 @@ public class SearchAlgorithms {
         return -1;
     }
 
+    public int interpolationSearch(int value) {
+        int l = 0;
+        int r = length - 1;
+        int m;
+        while (array[l] < value && array[r] > value) {
+            m = l + ((value - array[l]) * (r - l)) / (array[r] - array[l]);
+            if (array[m] < value)
+                l = m + 1;
+            else if (array[m] > value)
+                r = m - 1;
+            else
+                return m;
+        }
+        if (array[l] == value)
+            return l;
+        else if (array[r] == value)
+            return r;
+        else
+            return -1;
+    }
+
     public void print(){
         for (int i = 0; i < length; i++) {
             System.out.print(i + " = " + array[i] + "; ");
